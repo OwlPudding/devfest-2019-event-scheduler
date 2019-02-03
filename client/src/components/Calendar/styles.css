@@ -1,0 +1,12 @@
+.calendar-component {
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+}
+.rbc-toolbar .rbc-btn-group {
+  display: none;
+}
+.rbc-toolbar-label {
+  font-weight: bold;
+  font-size: 20px;
+}

@@ -5,6 +5,7 @@ import moment from 'moment';
 //COMPONENTS
 import BigCalendar from 'react-big-calendar';
 import TopBar from "../TopBar";
+import "./styles.css";
 
 //DATA
 const localizer = BigCalendar.momentLocalizer(moment);
@@ -31,7 +32,10 @@ class Calendar extends React.Component {
       <div>
         <TopBar />
         <BigCalendar
+          className="calendar-component"
           localizer={localizer}
+          defaultView="week"
+          views={["week"]}
           events={[]}
           startAccessor="start"
           endAccessor="end"
