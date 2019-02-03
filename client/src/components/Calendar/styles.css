@@ -11,3 +11,6 @@
 .rbc-event {
   background-color: tomato;
 }
+.rbc-event-content {
+  display: none;
+}
