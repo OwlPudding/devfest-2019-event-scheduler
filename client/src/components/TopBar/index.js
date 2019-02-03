@@ -8,7 +8,7 @@ class TopBar extends React.Component {
     return (
       <div className="top-bar">
         <Title />
-        <UsersBar />
+        <UsersBar randomColor={this.props.randomColor}/>
       </div>
     );
   }

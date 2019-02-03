@@ -1,58 +1,51 @@
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./styles.css";
 import React from "react";
 import moment from 'moment';
-import axios from "axios";
-
-//COMPONENTS
+import data from "./mstcal.json";
 import BigCalendar from 'react-big-calendar';
 import TopBar from "../TopBar";
-import "./styles.css";
-
-
-//import data from "./mstcal.json";
 
 //DATA
 const localizer = BigCalendar.momentLocalizer(moment);
 
-// const myEventsList = {
-//   one: {
-//     title: "My event one",
-//     start: Date.now(),
-//     end: Date.now(),
-//   }
-// }
-
-/**
- * Event {
-    title: string,
-    start: Date,
-    end: Date,
-    allDay?: boolean
-    resource?: any,
-  }
-  */
+const dataFormat = data.events.map(i => {
+  return ({
+    title: i.title,
+    start: new Date(i.start),
+    end: new Date(i.end),
+    "allDay?": i["allDay?"]
+  });
+});
 
 class Calendar extends React.Component {
-  // getJSON = () => {
-  //   axios.get("./mstcal.json").then(resp => {
-  //     console.log(resp.data);
-  //   })
-  // }
+  randomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  componentDidMount = () => {
+    const events = document.getElementsByClassName("rbc-event");
+    let style = document.createElement("style");
+    style.innerHTML = `.rbc-event { background-color: ${this.randomColor()} }`;
+    document.body.appendChild(style);
+  }
   render() {
-    //console.log(data);
     return (
       <div>
-        <TopBar />
+        <TopBar randomColor={this.randomColor}/>
         <BigCalendar
           className="calendar-component"
           localizer={localizer}
           defaultView="week"
           views={["week"]}
-          events={[]}
+          events={dataFormat.filter(i => i["allDay?"] == false)}
           startAccessor="start"
           endAccessor="end"
         />
-        <button onClick={this.getJSON}>CLICK ME</button>
       </div>
     );
   }
