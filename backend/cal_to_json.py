@@ -4,7 +4,7 @@ import json
 with open('events.pkl', 'rb') as f:
     events = pickle.load(f)
 
-print(type(events[0]['start'].get('dateTime')))
+print(type(events[1]['start'].get('dateTime')))
 
 mastercal = {"events":[]}
 for event in events:
@@ -22,4 +22,5 @@ for event in events:
 print(mastercal["events"][1])
 #print(mastercal["events"][1])
 with open('mstcal.json', 'a') as outfile:  
-    json.dump(dict(mastercal), outfile)
+    #change this
+    json.dump(mastercal, outfile)
