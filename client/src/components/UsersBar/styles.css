@@ -1,0 +1,8 @@
+.users-bar {
+  margin-top: -5px;
+  border-bottom: 3px solid #CCC;
+  border-left: 3px solid #CCC;
+  border-radius: 7px;
+  height: 67px;
+  width: 60%;
+}
