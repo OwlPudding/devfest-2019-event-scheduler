@@ -4,8 +4,7 @@ from random import randint
 
 
 def cal_to_json():
-    
-    def merge(old, new):
+def merge(old, new):
     new['events'] = old['events'] + new['events']
     return new
 
@@ -48,4 +47,3 @@ def cal_to_json():
         with open('mstcal.json', 'w') as outfile:  
             #merge and write json
             json.dump(merged_json, outfile)
-

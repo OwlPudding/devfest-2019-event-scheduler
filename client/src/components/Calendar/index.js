@@ -22,7 +22,6 @@ const dataFormat = data.events.map(i => {
     "allDay?": i["allDay?"]
   });
 }).filter(i => i["allDay?"] === false);
-
 //for each element in list of event dictionaries
 //get the username from the flask backend and associate a new random color
 //then pass that random color for each of their events
@@ -44,7 +43,7 @@ class Calendar extends React.Component {
     // users.map( (user, index) => {
       const color = this.randomColor();
       let style = document.createElement("style");
-      style.innerHTML = `.rbc-event-${index} { background-color: ${color} }`;
+      style.innerHTML = `.rbc-event { background-color: ${color} }`;
       document.body.appendChild(style);
       // this.setState({
       //   users: [
