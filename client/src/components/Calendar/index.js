@@ -19,6 +19,7 @@ const dataFormat = data.events.map(i => {
 });
 
 class Calendar extends React.Component {
+  //Generate random color for each block
   randomColor = () => {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -27,22 +28,24 @@ class Calendar extends React.Component {
     }
     return color;
   }
+  //Add each color to block
   componentDidMount = () => {
-    const events = document.getElementsByClassName("rbc-event");
     let style = document.createElement("style");
     style.innerHTML = `.rbc-event { background-color: ${this.randomColor()} }`;
     document.body.appendChild(style);
   }
+
   render() {
     return (
       <div>
+        {/* Pass randomColor function to top bar for user generation */}
         <TopBar randomColor={this.randomColor}/>
         <BigCalendar
           className="calendar-component"
           localizer={localizer}
           defaultView="week"
           views={["week"]}
-          events={dataFormat.filter(i => i["allDay?"] == false)}
+          events={dataFormat.filter(i => i["allDay?"] === false)}
           startAccessor="start"
           endAccessor="end"
         />
