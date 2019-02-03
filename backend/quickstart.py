@@ -1,5 +1,5 @@
 from __future__ import print_function
-import datetime
+from datetime import datetime, timezone, timedelta
 import pickle
 import os.path
 #test
@@ -9,6 +9,8 @@ from apiclient.discovery import build
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+#for the timestamps:
+#from datetime import datetime          
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -37,12 +39,20 @@ def main():
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
+    x = list()
+    x.append(service)
+    get_events(x, 3)
 
+def get_events(x, numofDays):
+    service = x[0]
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    now = datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    #from datetime import timezone 
+    #print('Getting the upcoming 10 events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
-                                        maxResults=10, singleEvents=True,
+    #maxResults=10,
+                                        timeMax=(datetime.now(timezone.utc).astimezone() +timedelta(days=numofDays)).isoformat(), 
+                                        singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
 
@@ -52,5 +62,9 @@ def main():
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
+    with open('events.pkl', 'wb') as f:
+        pickle.dump(events, f)
+
+    print(events[1])
 if __name__ == '__main__':
     main()
