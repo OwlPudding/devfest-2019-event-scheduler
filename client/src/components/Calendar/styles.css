@@ -1,9 +1,23 @@
+.app-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .calendar-component {
   display: block;
   margin: 0 auto;
-  width: 95%;
+  flex: 3;
+  padding-left: 30px;
 }
-
+li {
+  display: inline-block;
+  font-size: 20px;
+}
+.free-time {
+  float: left;
+  flex: 1;
+  padding-left: 30px;
+}
 .rbc-toolbar-label {
   font-weight: bold;
   font-size: 20px;
